@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="@id/Fname_register" />
 
     <EditText
-        android:id="@+id/Apt_register"
+        android:id="@+id/Aptno_register"
         android:layout_width="347dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
@@ -68,9 +68,9 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:paddingLeft="16dp"
-        app:layout_constraintEnd_toEndOf="@id/Apt_register"
-        app:layout_constraintStart_toStartOf="@id/Apt_register"
-        app:layout_constraintTop_toTopOf="@id/Apt_register" />
+        app:layout_constraintEnd_toEndOf="@id/Aptno_register"
+        app:layout_constraintStart_toStartOf="@id/Aptno_register"
+        app:layout_constraintTop_toTopOf="@id/Aptno_register" />
 
     <EditText
         android:id="@+id/password_edittext_register"
@@ -86,20 +86,34 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/email_edittext_register"
         app:layout_constraintTop_toBottomOf="@+id/email_edittext_register" />
+    <EditText
+        android:id="@+id/password_check_register"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Re-Enter Password"
+        android:inputType="textPassword"
+        android:paddingLeft="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/password_edittext_register"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/password_edittext_register"
+        app:layout_constraintTop_toBottomOf="@+id/password_edittext_register" />
 
     <Button
         android:id="@+id/register_button_register"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/rounded_button"
         android:text="Register"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/password_edittext_register"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/password_edittext_register"
-        app:layout_constraintTop_toBottomOf="@+id/password_edittext_register" />
+        app:layout_constraintEnd_toEndOf="@+id/password_check_register"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/password_check_register"
+        app:layout_constraintTop_toBottomOf="@+id/password_check_register" />
 
     <TextView
         android:id="@+id/already_have_account_textview"
@@ -116,6 +130,8 @@
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="@+id/register_button_register"
         app:layout_constraintTop_toBottomOf="@+id/register_button_register" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
