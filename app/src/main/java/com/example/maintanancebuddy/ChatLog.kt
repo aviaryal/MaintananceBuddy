@@ -53,6 +53,7 @@ class ChatLog : Fragment() {
             toUser?.uid?.let { Log.d("Chat_log ", "UserID" + it) }
 
         }
+
         recyclerview_chatlog.adapter = adapter
 
         listenmessages()

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="repair_items_type">
+        <item>Pumping</item>
+        <item>AC</item>
+        <item>Electricity</item>
+    </string-array>
+
+</resources>

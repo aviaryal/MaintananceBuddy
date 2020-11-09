@@ -19,6 +19,7 @@ class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>() 
 
     override fun getLayout(): Int {
         return R.layout.chat_from_row
+        //return R.layout.chat_to_row
     }
 }
 
@@ -34,5 +35,6 @@ class ChatToItem(val text: String, val user: User): Item<GroupieViewHolder>() {
 
     override fun getLayout(): Int {
         return R.layout.chat_to_row
+        //return  R.layout.chat_from_row
     }
 }

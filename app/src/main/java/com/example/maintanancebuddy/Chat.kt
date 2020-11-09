@@ -1,5 +1,6 @@
 package com.example.maintanancebuddy
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -52,10 +53,10 @@ class Chat : Fragment() {
     ): View? {
 
 
-        fragmentview= inflater.inflate(R.layout.fragment_chat, container, false)
+        //fragmentview= inflater.inflate(R.layout.fragment_chat, container, false)
+        return inflater.inflate(R.layout.fragment_chat, container, false)
 
-
-        return fragmentview
+        //return fragmentview
     }
     companion object {
         val USER_KEY = "USER_KEY"
@@ -66,6 +67,9 @@ class Chat : Fragment() {
 
     private fun getUsers()
     {
+        val preferences = activity
+            ?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        val isadmin= preferences?.getInt("isadmin",2121)
         val ref=FirebaseDatabase.getInstance().getReference("/users")
         val uid = FirebaseAuth.getInstance().uid
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -75,10 +79,13 @@ class Chat : Fragment() {
                 snapshot.children.forEach() {
                     val user = it.getValue(User::class.java)
 
-                    if (user != null  && user.uid!=uid) {
-                        adapter.add(UserItem(user))
-
+                    if (user != null  && user.uid!=uid ) {
+                            if(isadmin==1)
+                                adapter.add(UserItem(user))
+                            else if( user.isAdmin==1)
+                                adapter.add(UserItem(user))
                     }
+
                 }
                 adapter.setOnItemClickListener() { item, view ->
                     val userItem = item as UserItem

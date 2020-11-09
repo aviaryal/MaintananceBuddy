@@ -1,5 +1,6 @@
 package com.example.maintanancebuddy
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -59,8 +60,15 @@ class LoginActivity : AppCompatActivity() {
                 {
                     if (it.isSuccessful) {
                         Log.d("Login", "Login Sucessful: ${it.result?.user?.uid}")
+                        /*
                         var uid = auth.uid ?: ""
-                        checkUseraccesslevel(uid)
+
+                        val intent= Intent(this,MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+
+                         */
+                        checkuseraccesslevel()
                     } else {
                         Log.d("Login", "Login Failed", it.exception)
                         Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
@@ -74,15 +82,20 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-
-    private fun checkUseraccesslevel(uid: String) {
+    private fun checkuseraccesslevel()
+    {
+        val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val isadmin = snapshot.child("admin").getValue().toString().toInt()
-                Log.d("Database", isadmin.toString())
-                Log.d("Databse", snapshot.child("email").getValue().toString())
-                openactivity(isadmin)
+                val user= snapshot.getValue(User::class.java)
+                Log.d("MainActivity", "isadmin: $isadmin")
+                if (user != null) {
+                    savedata(user)
+                    openactivity()
+                }
+
 
             }
             override fun onCancelled(error: DatabaseError){
@@ -90,18 +103,23 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        Log.d("ref", "$ref")
+
     }
-
-    private fun openactivity(isadmin:Int)
+    private fun savedata(user: User)
     {
-
+        val sharedPreference =  getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        var editor = sharedPreference.edit()
+        editor.putInt("isadmin",user.isAdmin)
+        editor.putString("username", user.fname + user.lname)
+        editor.putString("email",user.email)
+        editor.putString("uid",user.uid)
+        editor.commit()
+    }
+    private fun openactivity()
+    {
         val intent= Intent(this,MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.putExtra("isadmin",isadmin)
-        //finish()
         startActivity(intent)
-
     }
 
 

@@ -9,7 +9,12 @@
         android:id="@+id/homepage"
         android:name="com.example.maintanancebuddy.Homepage"
         android:label="fragment_homepage"
-        tools:layout="@layout/fragment_homepage" />
+        tools:layout="@layout/fragment_homepage" >
+        <argument
+            android:name="isadmin"
+            app:argType="integer"
+            android:defaultValue="121" />
+    </fragment>
     <fragment
         android:id="@+id/chatLog"
         android:name="com.example.maintanancebuddy.ChatLog"
@@ -24,15 +29,44 @@
         <action
             android:id="@+id/action_chat_to_chatLog"
             app:destination="@id/chatLog" />
+        <argument
+            android:name="isadmin"
+            app:argType="integer"
+            android:defaultValue="121" />
     </fragment>
     <fragment
         android:id="@+id/repair"
         android:name="com.example.maintanancebuddy.Repair"
         android:label="fragment_repair"
-        tools:layout="@layout/fragment_repair" />
+        tools:layout="@layout/fragment_repair" >
+        <argument
+            android:name="isadmin"
+            app:argType="integer"
+            android:defaultValue="121" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.example.maintanancebuddy.Profile"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="isadmin"
+            app:argType="integer"
+            android:defaultValue="121" />
+    </fragment>
+    <fragment
+        android:id="@+id/resident_profile"
+        android:name="com.example.maintanancebuddy.resident_profile"
+        android:label="fragment_resident_profile"
+        tools:layout="@layout/fragment_resident_profile" />
+    <fragment
+        android:id="@+id/manager_Profile"
+        android:name="com.example.maintanancebuddy.Manager_Profile"
+        android:label="fragment_manager__profile"
+        tools:layout="@layout/fragment_manager__profile" />
+    <fragment
+        android:id="@+id/repair_details_resident"
+        android:name="com.example.maintanancebuddy.Repair_details_resident"
+        android:label="fragment_repair_details_resident"
+        tools:layout="@layout/fragment_repair_details_resident" />
 </navigation>

@@ -1,12 +1,16 @@
 package com.example.maintanancebuddy
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_profile.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,22 +26,35 @@ class Profile : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    //val args: ConfirmationFragmentArgs by navArgs()
+    private var isadmin= Int
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        //var isadmin=arguments?.getInt("isadmin")
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signout.setOnClickListener{
-            val intent= Intent(activity,LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+
+            //isadmin=arguments?.getInt("isadmin")
+        val preferences = activity
+            ?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        val isadmin= preferences?.getInt("isadmin",2121)
+
+        if(isadmin==1)
+        {
+            findNavController().navigate(R.id.manager_Profile)
         }
+        else
+        {
+            findNavController().navigate(R.id.resident_profile)
+        }
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,4 +83,5 @@ class Profile : Fragment() {
                 }
             }
     }
+
 }
