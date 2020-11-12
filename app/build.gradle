@@ -71,7 +71,7 @@ dependencies {
     // Add the dependency for the Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
-
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
     //Mulitdex error
     implementation 'com.android.support:multidex:1.0.3'
     //dependi for buttom navigation bar

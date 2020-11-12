@@ -112,6 +112,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putInt("isadmin",user.isAdmin)
         editor.putString("username", user.fname + user.lname)
         editor.putString("email",user.email)
+        editor.putString("aptno",user.aptno)
         editor.putString("uid",user.uid)
         editor.commit()
     }
