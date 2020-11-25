@@ -37,8 +37,8 @@ class LoginActivity : AppCompatActivity() {
         register_account.setOnClickListener()
         {
             Log.d("Login", "User new account clicked")
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            val intent = Intent(this, RegisterActivity::class.java) //
+            startActivity(intent) //
         }
 
     }

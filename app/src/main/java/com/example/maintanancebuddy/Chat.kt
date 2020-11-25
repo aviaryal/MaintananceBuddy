@@ -94,6 +94,7 @@ class Chat : Fragment() {
 
                     view.findNavController().navigate(R.id.action_chat_to_chatLog,bundle)
 
+
                 }
                 recyclerview_chat.adapter = adapter
             }

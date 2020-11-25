@@ -81,6 +81,7 @@ class Repair : Fragment() {
                         Log.d(TAG,repair_details.type)
                     }
                 }
+
                 recyclerview_repair.adapter = adapter
             }
 

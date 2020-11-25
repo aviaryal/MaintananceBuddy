@@ -50,6 +50,7 @@ tools:context=".Manager_Profile">
             android:text="Account" />
 
         <TextView
+            android:id="@+id/manage_employee"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

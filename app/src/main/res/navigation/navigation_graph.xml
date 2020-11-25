@@ -69,4 +69,9 @@
         android:name="com.example.maintanancebuddy.Repair_details_resident"
         android:label="fragment_repair_details_resident"
         tools:layout="@layout/fragment_repair_details_resident" />
+    <fragment
+        android:id="@+id/manage_employee"
+        android:name="com.example.maintanancebuddy.manage_employee"
+        android:label="fragment_manage_employee"
+        tools:layout="@layout/fragment_manage_employee" />
 </navigation>
