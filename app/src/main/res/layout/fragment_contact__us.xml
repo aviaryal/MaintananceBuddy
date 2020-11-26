@@ -20,18 +20,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="176dp"
+        android:id="@+id/contact_us_text_information"
+        android:layout_width="371dp"
+        android:layout_height="222dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:text="Leasing Manager: Maintenance Buddy
+        \nContact Details: XXX-XXX-XXXX
+         \nOffice Hours: 9 A.M. - 4 P.M.
+         \n\nIf this is an emergency, please contact 911.
+           \n\nWe strive to provide the best living experience.
+            \nThank You for using this app."
+
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header_contact_us" />
+
+    <Button
+        android:id="@+id/go_back_from_contact_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="View Resident Page"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contact_us_text_information" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

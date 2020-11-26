@@ -38,7 +38,7 @@ class Manager_Profile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        contactUs.setOnClickListener{
+        contactUs_button.setOnClickListener{
                 startActivity(Intent(activity,Contact_Us::class.java))
         }
 

@@ -1,10 +1,11 @@
 package com.example.maintanancebuddy
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_update_records.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,6 +38,13 @@ class UpdateRecords : Fragment() {
         return inflater.inflate(R.layout.fragment_update_records, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        saveChanges()
+        cancelChanges()
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -55,5 +63,17 @@ class UpdateRecords : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    //yet to implement save changes
+    private fun saveChanges(){
+        save_edit_changes.setOnClickListener{
+
+        }
+    }
+    private fun cancelChanges(){
+        cancel_edit_changes.setOnClickListener{
+            fragmentManager?.popBackStack()
+        }
     }
 }

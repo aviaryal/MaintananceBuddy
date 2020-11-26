@@ -37,7 +37,8 @@ class resident_profile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        view_contact_us_fromresident()
+        updateinfo_edit()
         showEmergency()
        signout()
 
@@ -70,6 +71,17 @@ class resident_profile : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun view_contact_us_fromresident(){
+        contactUs_button.setOnClickListener{
+            it.findNavController().navigate(R.id.contact_Us)
+        }
+    }
+    private fun updateinfo_edit(){
+        updateInfo_resident_profile.setOnClickListener{
+            it.findNavController().navigate(R.id.updateRecords)
+        }
     }
     private fun signout()
     {
