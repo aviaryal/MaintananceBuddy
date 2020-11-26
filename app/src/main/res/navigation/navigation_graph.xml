@@ -16,6 +16,11 @@
             android:defaultValue="121" />
     </fragment>
     <fragment
+        android:id="@+id/notification"
+        android:name="com.example.maintanancebuddy.Notification"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
         android:id="@+id/chatLog"
         android:name="com.example.maintanancebuddy.ChatLog"
         android:label="fragment_chat_log"
@@ -74,4 +79,15 @@
         android:name="com.example.maintanancebuddy.manage_employee"
         android:label="fragment_manage_employee"
         tools:layout="@layout/fragment_manage_employee" />
+    <fragment
+        android:id="@+id/repair_History_resident"
+        android:name="com.example.maintanancebuddy.Repair_History_resident"
+        android:label="fragment_repair__history_resident"
+        tools:layout="@layout/fragment_repair__history_resident" />
+    <fragment
+        android:id="@+id/repair_Resident_History_details"
+        android:name="com.example.maintanancebuddy.Repair_Resident_History_details"
+        android:label="fragment_repair__resident__history_details"
+        tools:layout="@layout/fragment_repair__resident__history_details" />
+
 </navigation>

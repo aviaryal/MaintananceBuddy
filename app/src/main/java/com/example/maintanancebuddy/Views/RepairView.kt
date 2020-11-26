@@ -1,5 +1,6 @@
 package com.example.maintanancebuddy.Views
 
+import android.graphics.Color
 import android.util.Log
 import com.example.maintanancebuddy.Models.Maintanance_detail
 import com.example.maintanancebuddy.Models.User
@@ -12,10 +13,18 @@ import kotlinx.android.synthetic.main.repair_row_view.view.*
 class RepairItem(var repair: Maintanance_detail): Item<GroupieViewHolder>() {
     override fun bind(GroupieViewHolder: GroupieViewHolder, position: Int) {
         GroupieViewHolder.itemView.textview_repair_titile.text =repair.type
+
+        if(repair.status=="requested")
+        {
+            GroupieViewHolder.itemView.textview_repair_status.setTextColor(Color.parseColor("#FFBA5F"))
+
+        }
+        else if(repair.status=="completed")
+            GroupieViewHolder.itemView.textview_repair_status.setTextColor(Color.parseColor("#008000"))
+        GroupieViewHolder.itemView.textview_repair_status.text= repair.status
+
         Log.d("RepairItem",repair.type)
-        // val uri = user.profileImageUrl
-        //val targetImageView = GroupieViewHolder.itemView.imageview_chat_from_row
-        //Picasso.get().load(uri).into(targetImageView)
+
     }
 
     override fun getLayout(): Int {
