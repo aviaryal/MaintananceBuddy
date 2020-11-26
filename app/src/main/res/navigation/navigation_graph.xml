@@ -89,4 +89,9 @@
         android:name="com.example.maintanancebuddy.Emergency_Contact_Information"
         android:label="fragment_emergency__contact__information"
         tools:layout="@layout/fragment_emergency__contact__information" />
+    <fragment
+        android:id="@+id/update_Manager_Information"
+        android:name="com.example.maintanancebuddy.Update_Manager_Information"
+        android:label="fragment_update__manager__information"
+        tools:layout="@layout/fragment_update__manager__information" />
 </navigation>

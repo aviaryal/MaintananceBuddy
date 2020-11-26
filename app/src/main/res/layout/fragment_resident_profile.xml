@@ -133,12 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Update Your Info" />
-            <Button
-                android:id="@+id/viewRentersInsurance_resident_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="View Renter's Insurance" />
+
             <Button
                 android:id="@+id/viewMaintenance_resident_profile"
                 android:layout_width="match_parent"
