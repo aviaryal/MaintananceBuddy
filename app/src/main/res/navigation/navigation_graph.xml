@@ -55,7 +55,7 @@
             android:defaultValue="121" />
     </fragment>
     <fragment
-        android:id="@+id/resident_profile"
+        android:id="@+id/Resident_profile"
         android:name="com.example.maintanancebuddy.resident_profile"
         android:label="fragment_resident_profile"
         tools:layout="@layout/fragment_resident_profile" />
@@ -74,4 +74,19 @@
         android:name="com.example.maintanancebuddy.manage_employee"
         android:label="fragment_manage_employee"
         tools:layout="@layout/fragment_manage_employee" />
+    <fragment
+        android:id="@+id/updateRecords"
+        android:name="com.example.maintanancebuddy.UpdateRecords"
+        android:label="fragment_update_records"
+        tools:layout="@layout/fragment_update_records" />
+    <fragment
+        android:id="@+id/contact_Us"
+        android:name="com.example.maintanancebuddy.Contact_Us"
+        android:label="fragment_contact__us"
+        tools:layout="@layout/fragment_contact__us" />
+    <fragment
+        android:id="@+id/emergency_Contact_Information"
+        android:name="com.example.maintanancebuddy.Emergency_Contact_Information"
+        android:label="fragment_emergency__contact__information"
+        tools:layout="@layout/fragment_emergency__contact__information" />
 </navigation>

@@ -2,16 +2,13 @@ package com.example.maintanancebuddy
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.method.TextKeyListener.clear
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.fragment_manager__profile.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_resident_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -40,7 +37,10 @@ class resident_profile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        signout()
+
+        showEmergency()
+       signout()
+
 
     }
 
@@ -92,5 +92,11 @@ class resident_profile : Fragment() {
             editor.commit()
         }
 
+    }
+
+    private fun showEmergency(){
+        show_resident_emergency_profile.setOnClickListener{
+            it.findNavController().navigate(R.id.emergency_Contact_Information)
+        }
     }
 }
