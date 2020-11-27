@@ -34,7 +34,7 @@ class Repair : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var ref: DatabaseReference
-    val adapter = GroupAdapter<GroupieViewHolder>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -45,11 +45,14 @@ class Repair : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showrepair()
-        onrequestclicked(view)
         val preferences = activity
             ?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         val isadmin= preferences?.getInt("isadmin",2121)
+        if(isadmin==1)
+            Resident_repair_history_buttom.text="View Request"
+        onrequestclicked(view)
+        onHistoryclicked(view)
+
     }
 
     override fun onCreateView(
@@ -64,37 +67,19 @@ class Repair : Fragment() {
         val TAG="Repair"
     }
 
-    private fun showrepair()
-    {
-        val uid = FirebaseAuth.getInstance().uid
 
-        val ref= FirebaseDatabase.getInstance().getReference("/repair/$uid")
-
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-
-                val adapter = GroupAdapter<GroupieViewHolder>()
-                snapshot.children.forEach() {
-                    val repair_details = it.getValue(Maintanance_detail::class.java)
-                    if (repair_details != null) {
-                        adapter.add(RepairItem(repair_details))
-                        Log.d(TAG,repair_details.type)
-                    }
-                }
-
-                recyclerview_repair.adapter = adapter
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
-
-    }
     private fun onrequestclicked(view: View)
     {
         RepairRequest.setOnClickListener{
             it.findNavController().navigate(R.id.repair_details_resident)
         }
+    }
+    private fun onHistoryclicked(view: View)
+    {
+        Resident_repair_history_buttom.setOnClickListener(){
+            it.findNavController().navigate(R.id.repair_History_resident)
+        }
+
+
     }
 }
