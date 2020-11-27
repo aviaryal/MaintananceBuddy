@@ -39,6 +39,7 @@ class Manager_Profile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        add_new_post()
         update_manager_info()
         signout()
         getdata_manager()
@@ -84,6 +85,13 @@ class Manager_Profile : Fragment() {
             it.findNavController().navigate(R.id.update_Manager_Information)
         }
     }
+
+    private fun add_new_post(){
+        addCommunityPost.setOnClickListener{
+            it.findNavController().navigate(R.id.addPost)
+        }
+    }
+
     private fun signout()
     {
         manager_signout.setOnClickListener {

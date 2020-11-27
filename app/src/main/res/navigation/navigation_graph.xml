@@ -94,4 +94,9 @@
         android:name="com.example.maintanancebuddy.Update_Manager_Information"
         android:label="fragment_update__manager__information"
         tools:layout="@layout/fragment_update__manager__information" />
+    <fragment
+        android:id="@+id/addPost"
+        android:name="com.example.maintanancebuddy.AddPost"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post" />
 </navigation>
