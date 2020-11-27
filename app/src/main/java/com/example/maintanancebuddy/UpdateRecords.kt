@@ -1,10 +1,14 @@
 package com.example.maintanancebuddy
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_update_records.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,6 +50,7 @@ class UpdateRecords : Fragment() {
     }
 
     companion object {
+        val TAG = "Update Resident Information"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -68,12 +73,65 @@ class UpdateRecords : Fragment() {
     //yet to implement save changes
     private fun saveChanges(){
         save_edit_changes.setOnClickListener{
-
+            savedata()
         }
     }
+
     private fun cancelChanges(){
         cancel_edit_changes.setOnClickListener{
             fragmentManager?.popBackStack()
         }
+    }
+
+    private fun savedata(){
+        if(display_name_update_records.text.toString().isEmpty()){
+            Toast.makeText(activity,"The user first name field cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(display_lname_update.text.toString().isEmpty()){
+            Toast.makeText(activity,"The user last name field cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(display_phone_update_records.text.toString().isEmpty()){
+            Toast.makeText(activity,"The phone number field cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(display_EmergencyName_update_records.text.toString().isEmpty()){
+            Toast.makeText(activity,"The emergency name field cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(display_EmergencyRelationship_update_records.text.toString().isEmpty()){
+            Toast.makeText(activity,"The emergency field cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(display_EmergencyPhone_update_records.text.toString().isEmpty()){
+            Toast.makeText(activity,"The emergency phone field cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val uid = FirebaseAuth.getInstance().uid
+        val ref= FirebaseDatabase.getInstance().getReference("users/$uid")
+
+        ref.child("fname").setValue(display_name_update_records.text.toString())
+        ref.child("lname").setValue(display_lname_update.text.toString())
+        ref.child("cellphone").setValue(display_phone_update_records.text.toString())
+
+        val sharedPreference =  activity?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        var editor = sharedPreference?.edit()
+        editor?.putString("username", display_name_update_records.text.toString()+" "+(display_lname_update.text.toString()))
+        editor?.putString("cellphone",display_phone_update_records.text.toString())
+        editor?.commit()
+
+
+        val ref2=FirebaseDatabase.getInstance().getReference("Emergency_Contact/$uid")
+        ref2.child("name").setValue(display_EmergencyName_update_records.text.toString())
+        ref2.child("relationship").setValue(display_EmergencyRelationship_update_records.text.toString().isEmpty())
+        ref2.child("cellphone").setValue(display_EmergencyPhone_update_records.text.toString())
+
+        Toast.makeText(activity,"The record successfully updated", Toast.LENGTH_SHORT).show()
+
+        fragmentManager?.popBackStack()
+
+
     }
 }

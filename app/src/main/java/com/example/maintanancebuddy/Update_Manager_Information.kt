@@ -1,5 +1,6 @@
 package com.example.maintanancebuddy
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_update__manager__information.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -84,8 +86,10 @@ class Update_Manager_Information : Fragment() {
 
     private fun savedata()
     {
+        val uid = FirebaseAuth.getInstance().uid
 
-        val uid= FirebaseAuth.getInstance().uid
+        val ref= FirebaseDatabase.getInstance().getReference("users/$uid")
+
 
         if(manager_edit_name_update_records.text.toString().isEmpty())
         {
@@ -99,6 +103,16 @@ class Update_Manager_Information : Fragment() {
         }
 
 
+        ref.child("fname").setValue(manager_edit_name_update_records.text.toString())
+        ref.child("lname").setValue(manager_edit_lname_update_records.text.toString())
+        ref.child("cellphone").setValue(display_phone_update_records_manager.text.toString())
+        Toast.makeText(activity,"The record successfully updated", Toast.LENGTH_SHORT).show()
 
+        val sharedPreference =  activity?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        var editor = sharedPreference?.edit()
+        editor?.putString("username", manager_edit_name_update_records.text.toString()+" "+manager_edit_lname_update_records.text.toString())
+        editor?.putString("cellphone",display_phone_update_records_manager.text.toString())
+        editor?.commit()
+        fragmentManager?.popBackStack()
     }
 }

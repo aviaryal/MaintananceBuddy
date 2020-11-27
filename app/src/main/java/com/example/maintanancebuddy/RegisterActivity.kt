@@ -11,6 +11,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.maintanancebuddy.Models.User
+import com.example.maintanancebuddy.Models.emergencyContact
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -155,19 +156,23 @@ class RegisterActivity : AppCompatActivity(){
         val ref= FirebaseDatabase.getInstance().getReference("/users/$uid")
         val user= User(uid, Fname_register.text.toString(),LName_register.text.toString(),email_edittext_register.text.toString(),Aptno_register.text.toString(),cellphone_register.text.toString(),0)
         //ref.child("resident").child(uid).setValue(user)
-        ref.setValue(user)
-            .addOnSuccessListener {
-                Log.d("Register","Saved user to data base with uid of $uid")
-                val intent= Intent(this,LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                //finish()
-                Toast.makeText(this,"Registerd. Redirecting to Login",Toast.LENGTH_SHORT).show()
-                startActivity(intent)
-            }
-            .addOnFailureListener()
-            {
-                Log.d("Register", "Failed to set value to database: ${it.message}")
-            }
+        val ref2= FirebaseDatabase.getInstance().getReference("/Emergency_Contact/$uid")
+        val Emergency_Contact= emergencyContact(uid, "","","")
+        ref2.setValue(Emergency_Contact).addOnSuccessListener {
+            ref.setValue(user)
+                .addOnSuccessListener {
+                    Log.d("Register","Saved user to data base with uid of $uid")
+                    val intent= Intent(this,LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    //finish()
+                    Toast.makeText(this,"Registerd. Redirecting to Login",Toast.LENGTH_SHORT).show()
+                    startActivity(intent)
+                }
+                .addOnFailureListener()
+                {
+                    Log.d("Register", "Failed to set value to database: ${it.message}")
+                }
+        }
 
     }
 
