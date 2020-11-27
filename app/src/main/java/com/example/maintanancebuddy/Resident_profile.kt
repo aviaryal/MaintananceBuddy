@@ -37,6 +37,7 @@ class resident_profile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        display_resident_information()
         view_contact_us_fromresident()
         updateinfo_edit()
         showEmergency()
@@ -82,6 +83,17 @@ class resident_profile : Fragment() {
         updateInfo_resident_profile.setOnClickListener{
             it.findNavController().navigate(R.id.updateRecords)
         }
+    }
+
+    private fun display_resident_information(){
+        val preferences = activity ?.getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
+        display_resident_name.text=preferences?.getString("username","")
+
+        display_resident_email.text=preferences?.getString("email","")
+        display_apt_resident_profile.text=preferences?.getString("aptno","")
+        //display_resident_phone.text=ref.child("").toString()
+        //val name:String=ref.child("fname").getValue()
+
     }
     private fun signout()
     {

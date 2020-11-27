@@ -33,40 +33,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/email_resident_update_records"
+                android:id="@+id/first_name_update_records"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:text="Email " />
+                android:text="Name " />
 
             <EditText
-                android:id="@+id/display_Email_update_records"
+                android:id="@+id/display_name_update_records"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter a valid email ex ...@gmail.com"
                 android:text=" " />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/name_resident_update_records"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:text="Name " />
-
-                <EditText
-                    android:id="@+id/display_name_update_records"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,25 +128,6 @@
                 android:id="@+id/display_EmergencyPhone_update_records"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/emergency_Email_update_records"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:text="Email" />
-
-
-            <EditText
-                android:id="@+id/display_EmergencyEmail_update_records"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
         </LinearLayout>
 
     </LinearLayout>

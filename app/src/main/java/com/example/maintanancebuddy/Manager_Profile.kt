@@ -41,6 +41,7 @@ class Manager_Profile : Fragment() {
 
         update_manager_info()
         signout()
+        getdata_manager()
     }
 
     override fun onCreateView(
@@ -71,6 +72,13 @@ class Manager_Profile : Fragment() {
             }
     }
 
+    private fun getdata_manager(){
+        val preferences = activity ?.getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
+
+        display_manager_name.text=preferences?.getString("username","")
+        display_Manager_email.text=preferences?.getString("email","")
+        //display_Manager_phone.text=ref.child("").toString()
+    }
     private fun update_manager_info(){
         updateInfoManager.setOnClickListener{
             it.findNavController().navigate(R.id.update_Manager_Information)
