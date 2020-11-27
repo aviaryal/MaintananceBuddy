@@ -31,6 +31,19 @@ class LoginActivity : AppCompatActivity() {
         }
         forget_password_text_view.setOnClickListener()
         {
+
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Forgot Password")
+            val view = layoutInflater.inflate(R.layout.dialog_forgot_password,null)
+            val username= view.findViewById<EditText>(R.id.et_username)
+            builder.setView(view)
+            builder.setPositiveButton("Reset",DialogInterface.OnClickListener{_,_->
+                forgotPassword(username)
+            })
+            builder.setNegativeButton("Close",DialogInterface.OnClickListener{_,_->})
+            builder.show()
+        }
+
             Log.d("Login", "User forget password ")
             //val intent= Intent(this,Forget::class.java)
         }
