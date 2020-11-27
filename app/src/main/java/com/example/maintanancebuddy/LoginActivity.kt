@@ -114,6 +114,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("email",user.email)
         editor.putString("aptno",user.aptno)
         editor.putString("uid",user.uid)
+        editor.putString("cellphone",user.cellphone)
         editor.commit()
     }
     private fun openactivity()

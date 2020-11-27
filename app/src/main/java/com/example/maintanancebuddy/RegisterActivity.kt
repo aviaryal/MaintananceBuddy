@@ -153,15 +153,15 @@ class RegisterActivity : AppCompatActivity(){
     {
         val uid= auth.uid ?: ""
         val ref= FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val user= User(uid, Fname_register.text.toString(),LName_register.text.toString(),email_edittext_register.text.toString(),Aptno_register.text.toString(),0)
+        val user= User(uid, Fname_register.text.toString(),LName_register.text.toString(),email_edittext_register.text.toString(),Aptno_register.text.toString(),cellphone_register.text.toString(),0)
         //ref.child("resident").child(uid).setValue(user)
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("Register","Saved user to data base with uid of $uid")
-                val intent= Intent(this,MainActivity::class.java)
+                val intent= Intent(this,LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.putExtra("isadmin",0)
                 //finish()
+                Toast.makeText(this,"Registerd. Redirecting to Login",Toast.LENGTH_SHORT).show()
                 startActivity(intent)
             }
             .addOnFailureListener()
