@@ -35,8 +35,6 @@ class Chat : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
