@@ -150,9 +150,6 @@ class RegisterActivity : AppCompatActivity(){
 
     }
 
-
-
-
     private fun saveUsertoDatabase(imageurl:String)
     {
         val uid= auth.uid ?: ""
