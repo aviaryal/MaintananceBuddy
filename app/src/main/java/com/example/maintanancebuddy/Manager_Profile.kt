@@ -78,7 +78,7 @@ class Manager_Profile : Fragment() {
 
         display_manager_name.text=preferences?.getString("username","")
         display_Manager_email.text=preferences?.getString("email","")
-        //display_Manager_phone.text=ref.child("").toString()
+        display_Manager_phone.text=preferences?.getString("cellphone","")
     }
     private fun update_manager_info(){
         updateInfoManager.setOnClickListener{
