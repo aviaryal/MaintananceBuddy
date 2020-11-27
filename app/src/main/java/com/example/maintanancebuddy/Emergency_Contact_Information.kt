@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_emergency__contact__information.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -70,10 +73,26 @@ class Emergency_Contact_Information : Fragment() {
             }
     }
 
-    private fun display_emergency_information(){
+    private fun display_emergency_information() {
         val uid = FirebaseAuth.getInstance().uid
-        val ref= FirebaseDatabase.getInstance().getReference("Emergency_Contact/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/Emergency_Contact/$uid")
+       ref.addListenerForSingleValueEvent(object : ValueEventListener {
+       // val postListener = object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
 
-        display_EmergencyName_resident_profile.text =
+                // val name= snapshot.child("name").getValue(String::class.java)
+               display_EmergencyName_resident_profile.text = snapshot.child("name").getValue(String::class.java).toString()
+
+
+                display_EmergencyEmail_resident_profile.text =snapshot.child("cellphone").getValue(String::class.java).toString()
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+
     }
 }
