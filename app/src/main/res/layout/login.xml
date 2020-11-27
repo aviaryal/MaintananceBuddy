@@ -58,7 +58,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:clickable="true"
         android:text="Forget Password??"
         android:textColor="@android:color/white"
         android:textSize="16sp"
@@ -66,7 +65,6 @@
         app:layout_constraintEnd_toEndOf="@+id/login_button_login"
         app:layout_constraintStart_toStartOf="@+id/login_button_login"
         app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
-
     <TextView
         android:id="@+id/register_account"
         android:layout_width="wrap_content"
