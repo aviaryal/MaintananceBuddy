@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_update__manager__information.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,6 +48,7 @@ class Update_Manager_Information : Fragment() {
     }
 
     companion object {
+        val TAG = "Update Manager Information"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -73,6 +76,29 @@ class Update_Manager_Information : Fragment() {
 
     //Need to implement
     private fun save_manager_info_changes(){
+            save_manager_changes.setOnClickListener{
+                savedata()
+            }
+    }
+
+
+    private fun savedata()
+    {
+
+        val uid= FirebaseAuth.getInstance().uid
+
+        if(manager_edit_name_update_records.text.toString().isEmpty())
+        {
+            Toast.makeText(activity,"The name field cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(display_phone_update_records_manager.text.toString().isEmpty())
+        {
+            Toast.makeText(activity,"The phone field cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
 
     }
 }
