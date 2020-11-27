@@ -251,6 +251,8 @@ class Repair_details_resident : Fragment() {
         if(maintaince_details==null)
         {
             val reference = FirebaseDatabase.getInstance().getReference("/repair/$uid").push()
+            val keyrerfrence= reference.key!!
+            val secondref=FirebaseDatabase.getInstance().getReference("/repair_manager/$keyrerfrence")
             Log.d(TAG, "savedata $type")
             val repair_des= Maintanance_detail(
                 reference.key!!,
@@ -264,7 +266,7 @@ class Repair_details_resident : Fragment() {
                 "requested",
                 System.currentTimeMillis() / 1000
             )
-            val secondref=FirebaseDatabase.getInstance().getReference("/repair_manger").push()
+
             secondref.setValue(repair_des).addOnSuccessListener {
 
             }

@@ -87,7 +87,7 @@ class Repair_History_resident : Fragment() {
         if (isadmin==0)
             ref = FirebaseDatabase.getInstance().getReference("/repair/$uid")
         else
-            ref = FirebaseDatabase.getInstance().getReference("/repair_manger")
+            ref = FirebaseDatabase.getInstance().getReference("/repair_manager")
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

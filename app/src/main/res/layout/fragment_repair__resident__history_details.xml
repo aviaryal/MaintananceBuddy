@@ -211,18 +211,18 @@ tools:context=".Repair_Resident_History_details"
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout4">
 
                 <RadioButton
-                    android:id="@+id/yellow"
+                    android:id="@+id/ongoing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ongoing"
-                    android:onClick="onRadioButtonClicked"/>
+                    />
 
                 <RadioButton
-                    android:id="@+id/green"
+                    android:id="@+id/completed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Completed"
-                    android:onClick="onRadioButtonClicked"/>
+                    />
 
 
             </RadioGroup>

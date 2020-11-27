@@ -2,10 +2,20 @@ package com.example.maintanancebuddy
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.maintanancebuddy.Models.Maintanance_detail
+import com.example.maintanancebuddy.Views.Notification_view
+import com.example.maintanancebuddy.Views.RepairItem
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_chat_log.*
+import kotlinx.android.synthetic.main.fragment_notification.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,7 +31,7 @@ class Notification : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private lateinit var ref:DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -43,6 +53,12 @@ class Notification : Fragment() {
         val preferences = activity
             ?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         val isadmin= preferences?.getInt("isadmin",2121)
+        if (isadmin != null) {
+            shownotiftication(isadmin)
+        }
+
+
+
 
     }
 
@@ -65,4 +81,35 @@ class Notification : Fragment() {
                 }
             }
     }
+    private fun shownotiftication(isadmin:Int)
+    {
+        val uid = FirebaseAuth.getInstance().uid
+        if(isadmin==0)
+            ref = FirebaseDatabase.getInstance().getReference("/repair/$uid")
+        else
+            ref = FirebaseDatabase.getInstance().getReference("/repair_manager")
+        ref.orderByChild("timestamp").addListenerForSingleValueEvent(object : ValueEventListener
+        {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val adapter = GroupAdapter<GroupieViewHolder>()
+                snapshot.children.forEach() {
+                    val repair_details = it.getValue(Maintanance_detail::class.java)
+                    if (repair_details != null) {
+                        adapter.add(Notification_view(repair_details))
+
+                    }
+                }
+                recyclerview_notification.adapter=adapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+
+        })
+
+
+    }
+
 }

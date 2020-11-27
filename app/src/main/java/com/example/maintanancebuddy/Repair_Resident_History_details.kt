@@ -10,9 +10,12 @@ import android.view.ViewGroup
 import android.widget.MediaController
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.navigation.findNavController
 import com.example.maintanancebuddy.Models.Maintanance_detail
 import com.example.maintanancebuddy.Models.User
+import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_repair__resident__history_details.*
 
@@ -31,6 +34,7 @@ class Repair_Resident_History_details : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     var maintaince_details: Maintanance_detail?=null
+    private var whichradio:Int=-1
     private lateinit var mediaController: MediaController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +91,12 @@ class Repair_Resident_History_details : Fragment() {
                 radio_group.visibility=View.GONE
             else {
                 resident_edit_repair_request.text = "Submit"
+                radio_group.setOnCheckedChangeListener(){_,checkedID->
+                    if (checkedID==R.id.completed)
+                        whichradio=0;
+                    else(checkedID==R.id.ongoing)
+                        whichradio=1
+                }
 
             }
 
@@ -95,6 +105,14 @@ class Repair_Resident_History_details : Fragment() {
         resident_edit_repair_request.setOnClickListener(){
             if(isadmin==0) {
                 it.findNavController().navigate(R.id.repair_details_resident, bundle)
+            }
+            else
+            {
+                if(whichradio==-1) {
+                    Toast.makeText(activity, "Selected the status", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                editchanges()
             }
         }
 
@@ -125,7 +143,35 @@ class Repair_Resident_History_details : Fragment() {
         if(view is RadioButton)
         {
             val checked= view.isChecked
+            when (view.getId())
+            {
+                R.id.ongoing->
+                {
+                    whichradio=0
+                }
+                R.id.completed->
+                {
+                    whichradio=1
+                }
+            }
 
         }
+    }
+    private fun editchanges()
+    {
+        val user_uid = maintaince_details?.uid.toString()
+        val repair_id = maintaince_details?.id.toString()
+        val ref= FirebaseDatabase.getInstance().getReference("repair_manager/$repair_id")
+        val ref_res= FirebaseDatabase.getInstance().getReference("/repair/$user_uid/$repair_id")
+        if(whichradio==0) {
+            ref.child("status").setValue("completed")
+            ref_res.child("status").setValue("completed")
+        }
+        else if(whichradio==1)
+        {
+            ref.child("status").setValue("ongoing")
+            ref_res.child("status").setValue("ongoing")
+        }
+        fragmentManager?.popBackStack()
     }
 }
