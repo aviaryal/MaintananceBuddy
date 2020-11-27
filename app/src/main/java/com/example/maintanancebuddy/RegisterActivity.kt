@@ -1,7 +1,11 @@
 package com.example.maintanancebuddy
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
@@ -10,7 +14,9 @@ import com.example.maintanancebuddy.Models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.register.*
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -26,11 +32,42 @@ class RegisterActivity : AppCompatActivity(){
         setContentView(R.layout.register)
         auth= FirebaseAuth.getInstance()
         fstore= FirebaseFirestore.getInstance()
+        //try to upload photo
+        selectphoto_button_register.setOnClickListener()
+        {
+            Log.d("RegisterActivity", "try to open photo")
+
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 0)
+        }
+        //try to upload photo end
         register_button_register.setOnClickListener()
         {
             createAccount()
         }
     }
+
+    var selectedPhotoUri: Uri?=null
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==0 &&resultCode== Activity.RESULT_OK&&data!=null){
+            Log.d("RegisterActivity","Photo was selected")
+
+
+            selectedPhotoUri=data.data
+            val bitmap=MediaStore.Images.Media.getBitmap(contentResolver,selectedPhotoUri)
+
+            val bitmapDrawable=BitmapDrawable(bitmap)
+            //selectphoto_button_register.setBackgroundDrawable(bitmapDrawable)
+            selectphoto_button_register.setImageBitmap(bitmap)
+        }
+
+    }
+
+    //try to upload photo end
     private fun createAccount()
     {
         val firstname= Fname_register.text.toString()
@@ -69,6 +106,12 @@ class RegisterActivity : AppCompatActivity(){
                 if(it.isSuccessful)
                 {
                     Log.d("Register","CreateUserwithEmail: Sucess")
+                    //upload profile photo
+
+                    uploadImageToFirebaseStorage()
+
+
+                    //upload profile photo end
                     saveUsertoDatabase()
                 }
                 else
@@ -89,19 +132,36 @@ class RegisterActivity : AppCompatActivity(){
 
         return matcher.matches()
     }
+
+
+    private fun uploadImageToFirebaseStorage(){
+        if(selectedPhotoUri==null) return
+
+        val filename=UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        ref.putFile(selectedPhotoUri!!)
+            .addOnSuccessListener {
+                Log.d("RegisterActivity","Successfully uploaded image: ${it.metadata?.path}")
+            }
+
+    }
+
+
+
+
     private fun saveUsertoDatabase()
     {
         val uid= auth.uid ?: ""
         val ref= FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val user= User(uid, Fname_register.text.toString(),LName_register.text.toString(),email_edittext_register.text.toString(),Aptno_register.text.toString(),0)
+        val user= User(uid, Fname_register.text.toString(),LName_register.text.toString(),email_edittext_register.text.toString(),Aptno_register.text.toString(),cellphone_register.text.toString(),0)
         //ref.child("resident").child(uid).setValue(user)
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("Register","Saved user to data base with uid of $uid")
-                val intent= Intent(this,MainActivity::class.java)
+                val intent= Intent(this,LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.putExtra("isadmin",0)
                 //finish()
+                Toast.makeText(this,"Registerd. Redirecting to Login",Toast.LENGTH_SHORT).show()
                 startActivity(intent)
             }
             .addOnFailureListener()

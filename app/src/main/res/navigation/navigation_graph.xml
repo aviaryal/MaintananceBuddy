@@ -16,6 +16,11 @@
             android:defaultValue="121" />
     </fragment>
     <fragment
+        android:id="@+id/notification"
+        android:name="com.example.maintanancebuddy.Notification"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
         android:id="@+id/chatLog"
         android:name="com.example.maintanancebuddy.ChatLog"
         android:label="fragment_chat_log"
@@ -55,7 +60,7 @@
             android:defaultValue="121" />
     </fragment>
     <fragment
-        android:id="@+id/resident_profile"
+        android:id="@+id/Resident_profile"
         android:name="com.example.maintanancebuddy.resident_profile"
         android:label="fragment_resident_profile"
         tools:layout="@layout/fragment_resident_profile" />
@@ -69,4 +74,46 @@
         android:name="com.example.maintanancebuddy.Repair_details_resident"
         android:label="fragment_repair_details_resident"
         tools:layout="@layout/fragment_repair_details_resident" />
+    <fragment
+        android:id="@+id/manage_employee"
+        android:name="com.example.maintanancebuddy.manage_employee"
+        android:label="fragment_manage_employee"
+        tools:layout="@layout/fragment_manage_employee" />
+    <fragment
+
+        android:id="@+id/updateRecords"
+        android:name="com.example.maintanancebuddy.UpdateRecords"
+        android:label="fragment_update_records"
+        tools:layout="@layout/fragment_update_records" />
+    <fragment
+        android:id="@+id/contact_Us"
+        android:name="com.example.maintanancebuddy.Contact_Us"
+        android:label="fragment_contact__us"
+        tools:layout="@layout/fragment_contact__us" />
+    <fragment
+        android:id="@+id/emergency_Contact_Information"
+        android:name="com.example.maintanancebuddy.Emergency_Contact_Information"
+        android:label="fragment_emergency__contact__information"
+        tools:layout="@layout/fragment_emergency__contact__information" />
+    <fragment
+        android:id="@+id/update_Manager_Information"
+        android:name="com.example.maintanancebuddy.Update_Manager_Information"
+        android:label="fragment_update__manager__information"
+        tools:layout="@layout/fragment_update__manager__information" />
+    <fragment
+        android:id="@+id/addPost"
+        android:name="com.example.maintanancebuddy.AddPost"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post" />
+    <fragment
+        android:id="@+id/repair_History_resident"
+        android:name="com.example.maintanancebuddy.Repair_History_resident"
+        android:label="fragment_repair__history_resident"
+        tools:layout="@layout/fragment_repair__history_resident" />
+    <fragment
+        android:id="@+id/repair_Resident_History_details"
+        android:name="com.example.maintanancebuddy.Repair_Resident_History_details"
+        android:label="fragment_repair__resident__history_details"
+        tools:layout="@layout/fragment_repair__resident__history_details" />
+
 </navigation>
