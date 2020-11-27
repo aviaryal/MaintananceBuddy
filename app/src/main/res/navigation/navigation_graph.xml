@@ -105,7 +105,7 @@
         android:name="com.example.maintanancebuddy.AddPost"
         android:label="fragment_add_post"
         tools:layout="@layout/fragment_add_post" />
-
+    <fragment
         android:id="@+id/repair_History_resident"
         android:name="com.example.maintanancebuddy.Repair_History_resident"
         android:label="fragment_repair__history_resident"

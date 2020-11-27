@@ -78,6 +78,7 @@ class Repair : Fragment() {
     {
         Resident_repair_history_buttom.setOnClickListener(){
             it.findNavController().navigate(R.id.repair_History_resident)
+
         }
 
 
