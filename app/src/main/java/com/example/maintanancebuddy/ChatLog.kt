@@ -170,13 +170,12 @@ class ChatLog : Fragment() {
     private fun dummpydata()
     {
 
-
-        adapter.add(com.example.maintanancebuddy.ChatToItem())
         adapter.add(com.example.maintanancebuddy.ChatFromItem())
         adapter.add(com.example.maintanancebuddy.ChatToItem())
         adapter.add(com.example.maintanancebuddy.ChatFromItem())
         adapter.add(com.example.maintanancebuddy.ChatToItem())
         adapter.add(com.example.maintanancebuddy.ChatFromItem())
+        adapter.add(com.example.maintanancebuddy.ChatToItem())
         recyclerview_chatlog.adapter=adapter
 
     }
