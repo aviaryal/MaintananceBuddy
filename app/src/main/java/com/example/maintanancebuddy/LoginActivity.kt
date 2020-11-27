@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Forgot Password")
-            val view = layoutInflater.inflate(R.layout.password_reset,null)
+            val view = layoutInflater.inflate(R.layout.dialog_forgot_password,null)
             val username= view.findViewById<EditText>(R.id.et_username)
             builder.setView(view)
             builder.setPositiveButton("Reset",DialogInterface.OnClickListener{_,_->
