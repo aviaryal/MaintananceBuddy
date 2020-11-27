@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.maintanancebuddy.Models.Maintanance_detail
 import com.example.maintanancebuddy.Views.Notification_view
 import com.example.maintanancebuddy.Views.RepairItem
@@ -14,8 +16,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_chat_log.*
 import kotlinx.android.synthetic.main.fragment_notification.*
+import kotlinx.android.synthetic.main.fragment_repair__history_resident.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,9 +62,11 @@ class Notification : Fragment() {
 
 
 
+
     }
 
     companion object {
+        val TAG="Notification"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -88,28 +92,35 @@ class Notification : Fragment() {
             ref = FirebaseDatabase.getInstance().getReference("/repair/$uid")
         else
             ref = FirebaseDatabase.getInstance().getReference("/repair_manager")
-        ref.orderByChild("timestamp").addListenerForSingleValueEvent(object : ValueEventListener
-        {
+        //
+        ref.orderByChild("timestamp").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 val adapter = GroupAdapter<GroupieViewHolder>()
                 snapshot.children.forEach() {
                     val repair_details = it.getValue(Maintanance_detail::class.java)
                     if (repair_details != null) {
-                        adapter.add(Notification_view(repair_details))
-
+                        adapter.add(Notification_view(repair_details,isadmin))
+                        Log.d(TAG,repair_details.type)
                     }
                 }
-                recyclerview_notification.adapter=adapter
+                adapter.setOnItemClickListener(){ item, view ->
+                    val maintainceItem= item as Notification_view
+                    val bundle=Bundle()
+                    bundle.putParcelable(Repair_History_resident.Resident_repair_History,maintainceItem.repair)
+                    view.findNavController().navigate(R.id.repair_Resident_History_details,bundle)
+                }
+
+
+                recyclerview_notification.adapter = adapter
+
             }
+
 
             override fun onCancelled(error: DatabaseError) {
 
             }
-
-
         })
 
-
     }
-
 }

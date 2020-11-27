@@ -2,12 +2,24 @@ package com.example.maintanancebuddy
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import com.example.maintanancebuddy.Models.Maintanance_detail
+import com.example.maintanancebuddy.Models.addPostclass
+import com.example.maintanancebuddy.Views.RepairItem
+import com.example.maintanancebuddy.Views.addPostView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_homepage.*
+import kotlinx.android.synthetic.main.fragment_repair__history_resident.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +47,7 @@ class Homepage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         welcomeUserName()
-
+        loadpost()
 
     }
 
@@ -71,5 +83,31 @@ class Homepage : Fragment() {
         val preferences = activity ?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         welcometext.text="Welcome "+preferences?.getString("username","")
     }
+    private fun loadpost()
+    {
+        val ref=FirebaseDatabase.getInstance().getReference("/post")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val adapter = GroupAdapter<GroupieViewHolder>()
+                snapshot.children.forEach() {
+                    val newpost = it.getValue(addPostclass::class.java)
+                    if (newpost != null) {
+                        adapter.add(addPostView(newpost))
+                        Log.d(Repair.TAG,newpost.id)
+                    }
+                }
+
+                recyclerview_homepage.adapter = adapter
+
+            }
+
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
 
 }

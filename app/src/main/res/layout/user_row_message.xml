@@ -19,13 +19,13 @@
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageview_new_message"
+        app:layout_constraintBottom_toBottomOf="@+id/imageview_show_user_photo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageview_new_message"
-        app:layout_constraintTop_toTopOf="@+id/imageview_new_message" />
+        app:layout_constraintStart_toEndOf="@+id/imageview_show_user_photo"
+        app:layout_constraintTop_toTopOf="@+id/imageview_show_user_photo" />
 
-    <ImageView
-        android:id="@+id/imageview_new_message"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageview_show_user_photo"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginLeft="16dp"

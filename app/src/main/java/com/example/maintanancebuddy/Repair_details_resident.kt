@@ -167,6 +167,31 @@ class Repair_details_resident : Fragment() {
         }
 
     }
+    //trying to get pictures
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data != null) {
+            if (requestCode== 0 && resultCode== Activity.RESULT_OK && data.data !=null)
+            {
+                selectedPhotoUri= data.data
+                Toast.makeText(activity, "Getting picture", Toast.LENGTH_SHORT).show()
+                imageView_resident_details.setImageURI(selectedPhotoUri)
+                imageView_resident_details.visibility=View.VISIBLE
+            }
+            else if (requestCode== 1 && resultCode== Activity.RESULT_OK && data.data !=null)
+            {
+
+                selectedVideoUri= data.data
+                Toast.makeText(activity, "Getting video", Toast.LENGTH_SHORT).show()
+                videoview_resident_details.setVideoURI(selectedVideoUri)
+                videoview_resident_details.visibility- View.VISIBLE
+                mediaController.setAnchorView(resident_videocontainer_details)
+
+
+            }
+        }
+
+    }
     private fun saveImagetoStorage()
     {
         if(selectedPhotoUri==null) {
@@ -208,31 +233,7 @@ class Repair_details_resident : Fragment() {
         }
     }
 
-    //trying to get pictures
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (data != null) {
-            if (requestCode== 0 && resultCode== Activity.RESULT_OK && data.data !=null)
-            {
-                selectedPhotoUri= data.data
-                Toast.makeText(activity, "Getting picture", Toast.LENGTH_SHORT).show()
-                imageView_resident_details.setImageURI(selectedPhotoUri)
-                imageView_resident_details.visibility=View.VISIBLE
-            }
-            else if (requestCode== 1 && resultCode== Activity.RESULT_OK && data.data !=null)
-            {
 
-                selectedVideoUri= data.data
-                Toast.makeText(activity, "Getting video", Toast.LENGTH_SHORT).show()
-                videoview_resident_details.setVideoURI(selectedVideoUri)
-                videoview_resident_details.visibility- View.VISIBLE
-                mediaController.setAnchorView(resident_videocontainer_details)
-
-
-            }
-        }
-
-    }
     private fun savedata(imageuri: String, videouri: String)
     {
         val loc = repair_location_resident.editableText.toString()

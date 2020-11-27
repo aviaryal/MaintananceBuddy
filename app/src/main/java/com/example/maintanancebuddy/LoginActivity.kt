@@ -110,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
         val sharedPreference =  getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         var editor = sharedPreference.edit()
         editor.putInt("isadmin",user.isAdmin)
-        editor.putString("username", user.fname + user.lname)
+        editor.putString("username", user.fname +" "+ user.lname)
         editor.putString("email",user.email)
         editor.putString("aptno",user.aptno)
         editor.putString("uid",user.uid)

@@ -105,10 +105,9 @@ class Repair_History_resident : Fragment() {
                     val bundle=Bundle()
                     bundle.putParcelable(Resident_repair_History,maintainceItem.repair)
                     view.findNavController().navigate(R.id.repair_Resident_History_details,bundle)
-
-
                 }
                 recyclerview_repair.adapter = adapter
+
             }
 
 

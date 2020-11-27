@@ -15,5 +15,7 @@
         tools:layout_editor_absoluteX="14dp"
         tools:layout_editor_absoluteY="15dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="true"
+        app:stackFromEnd="true"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

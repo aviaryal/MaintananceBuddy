@@ -147,7 +147,7 @@
                 app:layout_constraintStart_toStartOf="@+id/register_button_register"
                 app:layout_constraintTop_toBottomOf="@+id/register_button_register" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/selectphoto_button_register"
                 android:layout_width="172dp"
                 android:layout_height="144dp"
@@ -156,7 +156,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/rounded_photo_buttom" />
+                android:src="@drawable/ic_baseline_account_circle_24"/>
 
             <EditText
                 android:id="@+id/cellphone_register"

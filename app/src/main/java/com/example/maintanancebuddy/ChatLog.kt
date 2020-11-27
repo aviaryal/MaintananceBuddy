@@ -108,8 +108,10 @@ class ChatLog : Fragment() {
                         adapter.add(ChatToItem(chatMessage.text, toUser!!))
                     }
                 }
-
-                recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
+                //if(recyclerview_chatlog.scrollToPosition(adapter.itemCount)!=null)
+                    //recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
+                //recyclerview_chatlog.scrollToPosition(adapter.itemCount-1)
+                //recyclerview_chatlog.scrollToPosition(recyclerview_chatlog.childCount)
 
             }
 
@@ -167,51 +169,7 @@ class ChatLog : Fragment() {
         val latestMessageToRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
         latestMessageToRef.setValue(chatMessage)
     }
-    private fun dummpydata()
-    {
-
-        adapter.add(com.example.maintanancebuddy.ChatFromItem())
-        adapter.add(com.example.maintanancebuddy.ChatToItem())
-        adapter.add(com.example.maintanancebuddy.ChatFromItem())
-        adapter.add(com.example.maintanancebuddy.ChatToItem())
-        adapter.add(com.example.maintanancebuddy.ChatFromItem())
-        adapter.add(com.example.maintanancebuddy.ChatToItem())
-        recyclerview_chatlog.adapter=adapter
-
-    }
 
 
 
-
-
-
-}
-
-class ChatFromItem(): Item<GroupieViewHolder>() {
-    override fun bind(GroupieViewHolder: GroupieViewHolder, position: Int) {
-
-
-        // val uri = user.profileImageUrl
-        //val targetImageView = GroupieViewHolder.itemView.imageview_chat_from_row
-        //Picasso.get().load(uri).into(targetImageView)
-    }
-
-    override fun getLayout(): Int {
-        return R.layout.chat_from_row
-    }
-}
-
-class ChatToItem(): Item<GroupieViewHolder>() {
-    override fun bind(GroupieViewHolder: GroupieViewHolder, position: Int) {
-
-
-        // load our user image into the star
-        // val uri = user.profileImageUrl
-        //val targetImageView = GroupieViewHolder.itemView.imageview_chat_to_row
-        // Picasso.get().load(uri).into(targetImageView)
-    }
-
-    override fun getLayout(): Int {
-        return R.layout.chat_to_row
-    }
 }
