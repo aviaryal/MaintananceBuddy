@@ -3,15 +3,13 @@ package com.example.maintanancebuddy
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_manager__profile.*
-import kotlin.math.sin
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,7 +38,11 @@ class Manager_Profile : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        add_new_post()
+        update_manager_info()
         signout()
+        getdata_manager()
     }
 
     override fun onCreateView(
@@ -70,6 +72,26 @@ class Manager_Profile : Fragment() {
                 }
             }
     }
+
+    private fun getdata_manager(){
+        val preferences = activity ?.getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
+
+        display_manager_name.text=preferences?.getString("username","")
+        display_Manager_email.text=preferences?.getString("email","")
+        //display_Manager_phone.text=ref.child("").toString()
+    }
+    private fun update_manager_info(){
+        updateInfoManager.setOnClickListener{
+            it.findNavController().navigate(R.id.update_Manager_Information)
+        }
+    }
+
+    private fun add_new_post(){
+        addCommunityPost.setOnClickListener{
+            it.findNavController().navigate(R.id.addPost)
+        }
+    }
+
     private fun signout()
     {
         manager_signout.setOnClickListener {
