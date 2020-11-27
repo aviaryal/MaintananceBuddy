@@ -72,6 +72,10 @@ class MainActivity: AppCompatActivity(){
                     hideBottomNav()
                     //supportActionBar?.setDisplayHomeAsUpEnabled(true)
                 }
+                R.id.repair_Resident_History_details->
+                {
+                    hideBottomNav()
+                }
                 else -> {
                     showBottomNav()
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)

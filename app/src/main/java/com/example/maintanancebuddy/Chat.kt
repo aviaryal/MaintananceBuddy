@@ -35,8 +35,6 @@ class Chat : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,6 +91,8 @@ class Chat : Fragment() {
                     bundle.putParcelable(USER_KEY,userItem.user)
 
                     view.findNavController().navigate(R.id.action_chat_to_chatLog,bundle)
+
+
 
                 }
                 recyclerview_chat.adapter = adapter

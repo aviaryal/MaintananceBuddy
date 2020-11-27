@@ -2,16 +2,13 @@ package com.example.maintanancebuddy
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.method.TextKeyListener.clear
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.fragment_manager__profile.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_resident_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -40,7 +37,12 @@ class resident_profile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        signout()
+        display_resident_information()
+        view_contact_us_fromresident()
+        updateinfo_edit()
+        showEmergency()
+       signout()
+
 
     }
 
@@ -71,6 +73,28 @@ class resident_profile : Fragment() {
                 }
             }
     }
+
+    private fun view_contact_us_fromresident(){
+        contactUs_button.setOnClickListener{
+            it.findNavController().navigate(R.id.contact_Us)
+        }
+    }
+    private fun updateinfo_edit(){
+        updateInfo_resident_profile.setOnClickListener{
+            it.findNavController().navigate(R.id.updateRecords)
+        }
+    }
+
+    private fun display_resident_information(){
+        val preferences = activity ?.getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
+        display_resident_name.text=preferences?.getString("username","")
+
+        display_resident_email.text=preferences?.getString("email","")
+        display_apt_resident_profile.text=preferences?.getString("aptno","")
+        //display_resident_phone.text=ref.child("").toString()
+        //val name:String=ref.child("fname").getValue()
+
+    }
     private fun signout()
     {
         resident_signout.setOnClickListener {
@@ -92,5 +116,11 @@ class resident_profile : Fragment() {
             editor.commit()
         }
 
+    }
+
+    private fun showEmergency(){
+        show_resident_emergency_profile.setOnClickListener{
+            it.findNavController().navigate(R.id.emergency_Contact_Information)
+        }
     }
 }

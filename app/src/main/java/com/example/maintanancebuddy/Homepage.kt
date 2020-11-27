@@ -1,10 +1,13 @@
 package com.example.maintanancebuddy
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.fragment_homepage.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +30,13 @@ class Homepage : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        welcomeUserName()
+
+
     }
 
     override fun onCreateView(
@@ -57,4 +67,9 @@ class Homepage : Fragment() {
                 }
             }
     }
+    private fun welcomeUserName(){
+        val preferences = activity ?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        welcometext.text="Welcome "+preferences?.getString("username","")
+    }
+
 }

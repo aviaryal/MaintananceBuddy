@@ -10,19 +10,7 @@
     android:background="@android:color/holo_purple">
 
 
-    <Button
-        android:id="@+id/repair_upload_image_resident"
-        android:layout_width="121dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_button"
-        android:text="Upload Image"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
-        app:layout_constraintStart_toEndOf="@+id/repair_video_image_resident"
-        app:layout_constraintTop_toBottomOf="@+id/repair_description_resident" />
+
 
     <Button
         android:id="@+id/submit_request"
@@ -88,17 +76,69 @@
         app:layout_constraintTop_toBottomOf="@+id/repair_location_resident" />
 
     <Button
-        android:id="@+id/repair_video_image_resident"
+        android:id="@+id/repair_upload_image_resident"
         android:layout_width="119dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_button"
-        android:text="Upload Video"
+        android:text="Upload Image"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repair_description_resident" />
+
+    <Button
+        android:id="@+id/repair_upload_video_resident"
+        android:layout_width="121dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:text="Upload Video"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/repair_upload_image_resident"
+        app:layout_constraintTop_toBottomOf="@+id/repair_description_resident" />
+
+    <ImageView
+        android:id="@+id/imageView_resident_details"
+        android:layout_width="175dp"
+        android:layout_height="206dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repair_upload_video_resident"
+        app:layout_constraintVertical_bias="0.132"
+        tools:src="@tools:sample/avatars" />
+
+    <FrameLayout
+        android:id="@+id/resident_videocontainer_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toEndOf="@+id/imageView_resident_details"
+        app:layout_constraintTop_toBottomOf="@+id/repair_upload_image_resident"
+        app:layout_constraintVertical_bias="0.125">
+
+        <VideoView
+            android:id="@+id/videoview_resident_details"
+            android:layout_width="191dp"
+            android:layout_height="189dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.813"
+            app:layout_constraintVertical_bias="0.128" />
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
