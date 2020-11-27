@@ -19,6 +19,6 @@ public data class User(
 
 
 @Parcelize
-class User(val uid: String, val fname: String, val lname: String, val email: String,val aptno: String, var isAdmin: Int ): Parcelable {
+class User(val uid: String, val fname: String, val lname: String, val email: String,val aptno: String, var isAdmin: Int): Parcelable {
     constructor() : this("", "", "", "","",0)
 }
