@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.os.PatternMatcher
 import android.util.Log
 import android.util.Patterns
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -32,10 +34,12 @@ class LoginActivity : AppCompatActivity() {
 
         login_button_login.setOnClickListener()
         {
+            hideMyKeyboard()
             SignIn()
         }
         forget_password_text_view.setOnClickListener()
         {
+            hideMyKeyboard()
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Forgot Password")
             val view = layoutInflater.inflate(R.layout.dialog_forgot_password,null)
@@ -52,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
         register_account.setOnClickListener()
         {
+            hideMyKeyboard()
             Log.d("Login", "User new account clicked")
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
@@ -94,6 +99,7 @@ private fun forgotPassword(username:EditText) {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this)
                 {
+
                     if (it.isSuccessful) {
                         Log.d("Login", "Login Sucessful: ${it.result?.user?.uid}")
                         /*
@@ -158,7 +164,19 @@ private fun forgotPassword(username:EditText) {
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
+    //close keyboard try
+    fun hideMyKeyboard(){
+        val view=this.currentFocus
+        if(view!=null){
+            val hideMe=getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            hideMe.hideSoftInputFromWindow(view.windowToken,0)
 
+        }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
+
+
+    //close keyboard
 
 }
 

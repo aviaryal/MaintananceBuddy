@@ -1,9 +1,12 @@
 package com.example.maintanancebuddy
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.maintanancebuddy.Models.User
@@ -20,14 +23,19 @@ class RegisterActivity : AppCompatActivity(){
     private lateinit var auth: FirebaseAuth
     private lateinit var fstore: FirebaseFirestore;
 
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register)
         auth= FirebaseAuth.getInstance()
         fstore= FirebaseFirestore.getInstance()
+        touchlayout.setOnClickListener(){
+            hideMyKeyboard()
+        }
         register_button_register.setOnClickListener()
         {
+            hideMyKeyboard()
             createAccount()
         }
     }
@@ -39,6 +47,8 @@ class RegisterActivity : AppCompatActivity(){
         val email= email_edittext_register.text.toString()
         val password=password_edittext_register.text.toString()
         val password_check = password_check_register.text.toString()
+
+
 
         if (email.isEmpty() || password.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || aptno.isEmpty() || password_check.isEmpty())
         {
@@ -68,6 +78,7 @@ class RegisterActivity : AppCompatActivity(){
             {
                 if(it.isSuccessful)
                 {
+                    hideMyKeyboard()
                     Log.d("Register","CreateUserwithEmail: Sucess")
                     saveUsertoDatabase()
                 }
@@ -79,6 +90,12 @@ class RegisterActivity : AppCompatActivity(){
             }
 
     }
+
+    //close keyboard try
+
+
+
+    //close keyboard
     private fun isValidPassowrd(password: String): Boolean {
         //ref https://stackoverflow.com/questions/36574183/how-to-validate-password-field-in-android
         val pattern: Pattern
@@ -97,6 +114,7 @@ class RegisterActivity : AppCompatActivity(){
         //ref.child("resident").child(uid).setValue(user)
         ref.setValue(user)
             .addOnSuccessListener {
+                hideMyKeyboard()
                 Log.d("Register","Saved user to data base with uid of $uid")
                 val intent= Intent(this,MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -110,6 +128,22 @@ class RegisterActivity : AppCompatActivity(){
             }
 
     }
+
+
+
+    //close keyboard try
+    fun hideMyKeyboard(){
+    val view=this.currentFocus
+        if(view!=null){
+            val hideMe=getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            hideMe.hideSoftInputFromWindow(view.windowToken,0)
+
+        }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
+
+
+    //close keyboard
 
 
 }
