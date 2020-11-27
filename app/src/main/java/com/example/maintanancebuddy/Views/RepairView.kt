@@ -24,7 +24,7 @@ class RepairItem(var repair: Maintanance_detail): Item<GroupieViewHolder>() {
             GroupieViewHolder.itemView.textview_repair_status.setTextColor(Color.parseColor("#00FF00"))
         else if(repair.status=="ongoing")
         {
-            GroupieViewHolder.itemView.textview_repair_status.setTextColor(Color.parseColor("#FFFF00"))
+            GroupieViewHolder.itemView.textview_repair_status.setTextColor(Color.parseColor("#0000FF"))
 
         }
         GroupieViewHolder.itemView.textview_repair_status.text= repair.status

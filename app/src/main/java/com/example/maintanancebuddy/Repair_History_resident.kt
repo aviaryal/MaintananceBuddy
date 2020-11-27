@@ -89,7 +89,7 @@ class Repair_History_resident : Fragment() {
         else
             ref = FirebaseDatabase.getInstance().getReference("/repair_manager")
 
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+        ref.orderByChild("timestamp").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 val adapter = GroupAdapter<GroupieViewHolder>()

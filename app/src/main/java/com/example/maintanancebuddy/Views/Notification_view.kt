@@ -23,7 +23,7 @@ class Notification_view(var repair: Maintanance_detail, var isadmin:Int): Item<G
                 GroupieViewHolder.itemView.notification_in_row.setTextColor(Color.parseColor("#00FF00"))
                 value = "Your request for maintenance of ${repair.type} is competed"
             } else if (repair.status == "ongoing") {
-                GroupieViewHolder.itemView.notification_in_row.setTextColor(Color.parseColor("#FFFF00"))
+                GroupieViewHolder.itemView.notification_in_row.setTextColor(Color.parseColor("#0000FF"))
                 value = "Your request for maintenance of ${repair.type} is ongoing"
             }
         }
@@ -34,10 +34,10 @@ class Notification_view(var repair: Maintanance_detail, var isadmin:Int): Item<G
                 value = "New Rquest from  ${repair.aptno} of  ${repair.type} "
             } else if (repair.status == "completed") {
                 GroupieViewHolder.itemView.notification_in_row.setTextColor(Color.parseColor("#00FF00"))
-                value = "Your request for maintenance of ${repair.type} is competed"
+                value = "Completed ${repair.type} at ${repair.aptno} "
             } else if (repair.status == "ongoing") {
-                GroupieViewHolder.itemView.notification_in_row.setTextColor(Color.parseColor("#FFFF00"))
-                value = "Your request for maintenance of ${repair.type} is ongoing"
+                GroupieViewHolder.itemView.notification_in_row.setTextColor(Color.parseColor("#0000FF"))
+                value = "Ongoing ${repair.type} at ${repair.aptno} "
             }
         }
 
