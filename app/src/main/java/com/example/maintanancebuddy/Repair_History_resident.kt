@@ -89,7 +89,7 @@ class Repair_History_resident : Fragment() {
         else
             ref = FirebaseDatabase.getInstance().getReference("/repair_manager")
 
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+        ref.orderByChild("timestamp").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 val adapter = GroupAdapter<GroupieViewHolder>()
@@ -105,10 +105,9 @@ class Repair_History_resident : Fragment() {
                     val bundle=Bundle()
                     bundle.putParcelable(Resident_repair_History,maintainceItem.repair)
                     view.findNavController().navigate(R.id.repair_Resident_History_details,bundle)
-
-
                 }
                 recyclerview_repair.adapter = adapter
+
             }
 
 

@@ -26,6 +26,7 @@ class RegisterActivity : AppCompatActivity(){
 
     private lateinit var auth: FirebaseAuth
     private lateinit var fstore: FirebaseFirestore;
+    var selectedPhotoUri: Uri?=null
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -49,7 +50,7 @@ class RegisterActivity : AppCompatActivity(){
         }
     }
 
-    var selectedPhotoUri: Uri?=null
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -108,12 +109,10 @@ class RegisterActivity : AppCompatActivity(){
                 {
                     Log.d("Register","CreateUserwithEmail: Sucess")
                     //upload profile photo
-
-                    uploadImageToFirebaseStorage()
-
-
-                    //upload profile photo end
-                    saveUsertoDatabase()
+                    if(selectedPhotoUri!=null)
+                        uploadImageToFirebaseStorage()
+                    else
+                        saveUsertoDatabase("")
                 }
                 else
                 {
@@ -140,21 +139,23 @@ class RegisterActivity : AppCompatActivity(){
 
         val filename=UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
-        ref.putFile(selectedPhotoUri!!)
-            .addOnSuccessListener {
-                Log.d("RegisterActivity","Successfully uploaded image: ${it.metadata?.path}")
+        ref.putFile(selectedPhotoUri!!).addOnSuccessListener {
+            Log.d(Repair_details_resident.TAG, "Successfully uploaded image: ${it.metadata?.path}")
+            ref.downloadUrl.addOnSuccessListener {
+                Log.d(Repair_details_resident.TAG, "Image Location: $it")
+                val pathimage=it.toString()
+                saveUsertoDatabase(pathimage)
             }
+
+        }
 
     }
 
-
-
-
-    private fun saveUsertoDatabase()
+    private fun saveUsertoDatabase(imageurl:String)
     {
         val uid= auth.uid ?: ""
         val ref= FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val user= User(uid, Fname_register.text.toString(),LName_register.text.toString(),email_edittext_register.text.toString(),Aptno_register.text.toString(),cellphone_register.text.toString(),0)
+        val user= User(uid, Fname_register.text.toString(),LName_register.text.toString(),email_edittext_register.text.toString(),Aptno_register.text.toString(),cellphone_register.text.toString(),imageurl,0)
         //ref.child("resident").child(uid).setValue(user)
         val ref2= FirebaseDatabase.getInstance().getReference("/Emergency_Contact/$uid")
         val Emergency_Contact= emergencyContact(uid, "","","")

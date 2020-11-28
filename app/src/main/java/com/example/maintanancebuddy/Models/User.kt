@@ -17,12 +17,13 @@ public data class User(
  */
 
 
-@Parcelize
-class User(val uid: String, val fname: String, val lname: String, val email: String,val aptno: String, val cellphone:String, var isAdmin: Int): Parcelable {
-    constructor() : this("", "", "", "","","",0)
-}
+
 
 @Parcelize
 class emergencyContact(val uid: String, val name: String,  val relationship: String,val cellphone:String): Parcelable {
     constructor() : this("", "", "", "")
+@Parcelize
+class User(val uid: String, val fname: String, val lname: String, val email: String,val aptno: String, val cellphone:String,val photurl:String, var isAdmin: Int): Parcelable {
+    constructor() : this("", "", "", "","","","",0)
+
 }

@@ -92,10 +92,15 @@ class Repair_Resident_History_details : Fragment() {
             else {
                 resident_edit_repair_request.text = "Submit"
                 radio_group.setOnCheckedChangeListener(){_,checkedID->
-                    if (checkedID==R.id.completed)
-                        whichradio=0;
-                    else(checkedID==R.id.ongoing)
+                    if (checkedID==R.id.completed) {
+                        whichradio = 0;
+                        Log.d(TAG,"Which Radio Buttom : Completed")
+                    }
+                    else if (checkedID==R.id.ongoing){
                         whichradio=1
+                        Log.d(TAG,"Which Radio Buttom : Ongoing")
+                    }
+
                 }
 
             }
@@ -120,6 +125,7 @@ class Repair_Resident_History_details : Fragment() {
     }
 
     companion object {
+        val TAG ="RepairHistoryDetails"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
