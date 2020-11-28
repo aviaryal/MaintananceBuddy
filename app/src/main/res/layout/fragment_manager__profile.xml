@@ -122,13 +122,6 @@
                 android:text="Update Your Info" />
 
             <Button
-                android:id="@+id/viewMaintenanceManager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Maintenance Record" />
-
-            <Button
                 android:id="@+id/manager_signout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

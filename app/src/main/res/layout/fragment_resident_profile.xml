@@ -133,12 +133,6 @@
                 android:text="Update Your Info" />
 
             <Button
-                android:id="@+id/viewMaintenance_resident_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Maintenance Record" />
-            <Button
                 android:id="@+id/contactUs_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
