@@ -34,10 +34,10 @@ class Notification_view(var repair: Maintanance_detail, var isadmin:Int): Item<G
                 value = "New Rquest from  ${repair.aptno} of  ${repair.type} "
             } else if (repair.status == "completed") {
                 GroupieViewHolder.itemView.notification_in_row.setTextColor(Color.parseColor("#00FF00"))
-                value = "Completed ${repair.type} at ${repair.aptno} "
+                value = "Completed ${repair.type} at apt ${repair.aptno} "
             } else if (repair.status == "ongoing") {
                 GroupieViewHolder.itemView.notification_in_row.setTextColor(Color.parseColor("#0000FF"))
-                value = "Ongoing ${repair.type} at ${repair.aptno} "
+                value = "Ongoing ${repair.type} at apt ${repair.aptno} "
             }
         }
 

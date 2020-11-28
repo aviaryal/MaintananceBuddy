@@ -11,10 +11,15 @@ import kotlinx.android.synthetic.main.chat_from_row.view.*
 
 import kotlinx.android.synthetic.main.repair_row_view.view.*
 
-class RepairItem(var repair: Maintanance_detail): Item<GroupieViewHolder>() {
+class RepairItem(var repair: Maintanance_detail, var isadmin: Int): Item<GroupieViewHolder>() {
     override fun bind(GroupieViewHolder: GroupieViewHolder, position: Int) {
-        GroupieViewHolder.itemView.textview_repair_titile.text =repair.type
 
+        if(isadmin==1) {
+            GroupieViewHolder.itemView.textview_repair_titile.text ="APT: "+repair.aptno+ " "+ repair.type
+
+        }
+        else
+            GroupieViewHolder.itemView.textview_repair_titile.text =repair.aptno+ " "+ repair.type
         if(repair.status=="requested")
         {
             GroupieViewHolder.itemView.textview_repair_status.setTextColor(Color.parseColor("#FF0000"))

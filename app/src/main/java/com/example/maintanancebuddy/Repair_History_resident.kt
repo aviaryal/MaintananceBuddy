@@ -96,7 +96,7 @@ class Repair_History_resident : Fragment() {
                 snapshot.children.forEach() {
                     val repair_details = it.getValue(Maintanance_detail::class.java)
                     if (repair_details != null) {
-                        adapter.add(RepairItem(repair_details))
+                        adapter.add(RepairItem(repair_details,isadmin))
                         Log.d(Repair.TAG,repair_details.type)
                     }
                 }
