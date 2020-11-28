@@ -80,6 +80,7 @@ class Manager_Profile : Fragment() {
         display_Manager_email.text=preferences?.getString("email","")
         display_Manager_phone.text=preferences?.getString("cellphone","")
     }
+
     private fun update_manager_info(){
         updateInfoManager.setOnClickListener{
             it.findNavController().navigate(R.id.update_Manager_Information)

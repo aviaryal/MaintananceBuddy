@@ -91,7 +91,7 @@ class resident_profile : Fragment() {
 
         display_resident_email.text=preferences?.getString("email","")
         display_apt_resident_profile.text=preferences?.getString("aptno","")
-        //display_resident_phone.text=ref.child("").toString()
+        display_resident_phone.text=preferences?.getString("cellphone","")
         //val name:String=ref.child("fname").getValue()
 
     }

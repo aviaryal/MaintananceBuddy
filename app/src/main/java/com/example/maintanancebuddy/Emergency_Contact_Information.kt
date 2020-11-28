@@ -5,6 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_emergency__contact__information.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,6 +46,8 @@ class Emergency_Contact_Information : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        display_emergency_information()
+
         emergency_return.setOnClickListener{
             //findNavController().navigate(R.id.resident)
             fragmentManager?.popBackStack()
@@ -64,5 +71,28 @@ class Emergency_Contact_Information : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun display_emergency_information() {
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/Emergency_Contact/$uid")
+       ref.addListenerForSingleValueEvent(object : ValueEventListener {
+       // val postListener = object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                // val name= snapshot.child("name").getValue(String::class.java)
+               display_EmergencyName_resident_profile.text = snapshot.child("name").getValue(String::class.java).toString()
+
+
+                display_EmergencyEmail_resident_profile.text =snapshot.child("cellphone").getValue(String::class.java).toString()
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+
     }
 }
