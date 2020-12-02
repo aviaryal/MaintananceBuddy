@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.maintanancebuddy.Models.Maintanance_detail
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -282,6 +283,7 @@ class Repair_details_resident : Fragment() {
         {
             val id=maintaince_details?.id.toString()
             val reference = FirebaseDatabase.getInstance().getReference("/repair/$uid/$id")
+            
             reference.child("descr").setValue(description)
             reference.child("locat").setValue(loc)
             reference.child("type").setValue(type)
@@ -289,7 +291,9 @@ class Repair_details_resident : Fragment() {
             reference.child("videouri").setValue(videouri)
             reference.child("timestamp").setValue(System.currentTimeMillis() / 1000)
             progreeDialog.dismiss()
-            fragmentManager?.popBackStack()
+            //fragmentManager?.popBackStack()
+            Toast.makeText(activity,"Editied sucessufully",Toast.LENGTH_SHORT).show()
+            view?.findNavController()?.navigate(R.id.repair)
         }
 
     }
