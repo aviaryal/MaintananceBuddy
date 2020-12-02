@@ -283,13 +283,20 @@ class Repair_details_resident : Fragment() {
         {
             val id=maintaince_details?.id.toString()
             val reference = FirebaseDatabase.getInstance().getReference("/repair/$uid/$id")
-            
+            val reference2= FirebaseDatabase.getInstance().getReference("/repair_manager/$id")
+
             reference.child("descr").setValue(description)
             reference.child("locat").setValue(loc)
             reference.child("type").setValue(type)
             reference.child("photouri").setValue(imageuri)
             reference.child("videouri").setValue(videouri)
             reference.child("timestamp").setValue(System.currentTimeMillis() / 1000)
+            reference2.child("descr").setValue(description)
+            reference2.child("locat").setValue(loc)
+            reference2.child("type").setValue(type)
+            reference2.child("photouri").setValue(imageuri)
+            reference2.child("videouri").setValue(videouri)
+            reference2.child("timestamp").setValue(System.currentTimeMillis() / 1000)
             progreeDialog.dismiss()
             //fragmentManager?.popBackStack()
             Toast.makeText(activity,"Editied sucessufully",Toast.LENGTH_SHORT).show()
